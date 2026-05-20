@@ -10,9 +10,10 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $jobs = ['Laravel Developer', 'Frontend Engineer', 'UI/UX Designer', 'Product Manager'];
+        return view('jobs.index', compact('jobs'));
     }
 
     /**

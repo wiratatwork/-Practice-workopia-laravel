@@ -1,3 +1,8 @@
+@extends('layout')
+
+@section('title', 'Create Job')
+
+@section('content')
 <form action="/jobs" method="POST">
     @csrf
     <div>
@@ -10,3 +15,4 @@
     </div>
     <button type="submit">Submit</button>
 </form>
+@endsection
