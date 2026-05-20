@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
@@ -17,17 +18,20 @@ class JobController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('jobs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): string
     {
-        //
+        $title = $request->input('title');
+        $description = $request->input('description');
+
+        return "Job created successfully! Title: $title, Description: $description";
     }
 
     /**
