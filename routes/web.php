@@ -12,14 +12,13 @@ Route::get('/contact', function () {
     return '<h1>Contact Us</h1>';
 });
 
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::resource('jobs', JobController::class);
 
 Route::get('/test-link', function () {
     $url = route('jobs.index');
     return "<a href='$url'>Click here to see all jobs</a>";
 });
 
-Route::get('/jobs/{id}', [JobController::class, 'show'])->whereNumber('id');
 
 Route::get('/category/{category}/post/{post_id}', function (string $category, string $post_id) {
     return 'Category: ' . $category . ' | Post ID: ' . $post_id;
