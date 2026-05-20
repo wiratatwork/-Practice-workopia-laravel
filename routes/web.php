@@ -12,7 +12,8 @@ Route::get('/contact', function () {
 });
 
 Route::get('/all-jobs', function () {
-    return 'Available Jobs';
+    $jobs = ['Laravel Developer', 'Frontend Engineer', 'UI/UX Designer', 'Product Manager'];
+    return view('jobs.index', compact('jobs'));
 })->name('jobs.index');
 
 Route::get('/test-link', function () {
