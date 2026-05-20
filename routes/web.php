@@ -43,3 +43,19 @@ Route::get('/check-user', function (Request $request) {
     $name = $request->input('name', 'Guest');
     return "Welcome, " . $name;
 });
+
+Route::get('/secret', function () {
+    return response('Access Denied', 403)
+        ->header('Content-Type', 'text/plain');
+});
+
+Route::get('/api/jobs', function () {
+    return response()->json([
+        ['title' => 'Laravel Developer', 'salary' => '50,000'],
+        ['title' => 'Backend Engineer', 'salary' => '60,000']
+    ]);
+});
+
+Route::get('/get-favicon', function () {
+    return response()->download(public_path('favicon.ico'));
+});
