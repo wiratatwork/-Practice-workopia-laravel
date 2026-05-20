@@ -59,3 +59,7 @@ Route::get('/api/jobs', function () {
 Route::get('/get-favicon', function () {
     return response()->download(public_path('favicon.ico'));
 });
+
+Route::post('/submit-data', function () {
+    return 'Submitted Successfully';
+});
