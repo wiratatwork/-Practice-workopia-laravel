@@ -30,7 +30,7 @@
                 @if($loop->first)
                     <strong>[New!]</strong> 
                 @endif
-                {{ $job }}
+                {{ $job->title }}
             </li>
             @empty
             <li>No jobs available</li>
