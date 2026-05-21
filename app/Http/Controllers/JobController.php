@@ -11,9 +11,13 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $jobs = Job::all();
+        if ($request->is('/')) {
+            $jobs = Job::latest()->limit(6)->get();
+        } else {
+            $jobs = Job::all();
+        }
         return view('jobs.index', compact('jobs'));
     }
 

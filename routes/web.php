@@ -4,9 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\JobController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JobController::class, 'index']);
 
 Route::get('/contact', function () {
     return '<h1>Contact Us</h1>';
