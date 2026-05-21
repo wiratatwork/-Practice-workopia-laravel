@@ -24,18 +24,26 @@
         </x-button-link>
     </div>
 
-    <ul>
+    <div class="grid grid-cols-1 gap-4">
         @forelse($jobs as $job)
-            <li>
-                @if($loop->first)
-                    <strong>[New!]</strong> 
-                @endif
-                <a href="/jobs/{{ $job->id }}" class="text-blue-600 hover:underline">
-                    {{ $job->title }}
-                </a>
-            </li>
+            <div class="p-4 border rounded-lg hover:bg-gray-50 transition-colors flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-2">
+                        @if($loop->first)
+                            <span class="text-xs font-bold bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full uppercase">Featured</span>
+                        @endif
+                        <a href="/jobs/{{ $job->id }}" class="text-lg font-semibold text-blue-600 hover:underline">
+                            {{ $job->title }}
+                        </a>
+                    </div>
+                    <p class="text-gray-500 text-sm">${{ number_format($job->salary) }} / year</p>
+                </div>
+                <a href="/jobs/{{ $job->id }}" class="text-sm text-gray-400 hover:text-blue-500">View Details &rarr;</a>
+            </div>
             @empty
-            <li>No jobs available</li>
+            <div class="text-center py-12 text-gray-500">
+                No jobs available at the moment.
+            </div>
             @endforelse
-        </ul>
+    </div>
 </x-layout>
