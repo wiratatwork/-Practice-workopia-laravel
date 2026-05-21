@@ -30,7 +30,9 @@
                 @if($loop->first)
                     <strong>[New!]</strong> 
                 @endif
-                {{ $job->title }}
+                <a href="/jobs/{{ $job->id }}" class="text-blue-600 hover:underline">
+                    {{ $job->title }}
+                </a>
             </li>
             @empty
             <li>No jobs available</li>
