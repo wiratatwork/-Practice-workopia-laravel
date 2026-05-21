@@ -1,5 +1,5 @@
 <nav>
-    <a href="/jobs">All Jobs</a> | 
-    <a href="/jobs/create">Create Job</a>
+    <x-nav-link url="/jobs" :active="request()->is('jobs')">All Jobs</x-nav-link> | 
+    <x-nav-link url="/jobs/create" :active="request()->is('jobs/create')">Create Job</x-nav-link>
 </nav>
 <hr>
