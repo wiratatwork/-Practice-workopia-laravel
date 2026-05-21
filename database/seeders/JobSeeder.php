@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Models\Job;
+use Carbon\Carbon;
 
 class JobSeeder extends Seeder
 {
@@ -13,21 +14,26 @@ class JobSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create([
-            'name' => 'Wirat Sakorn',
-            'email' => 'wiratatwork@gmail.com',
-            'password' => bcrypt('password'),
-        ]);
+        $jobListings = include database_path('seeders/data/job_listings.php');
+        $userIds = User::pluck('id')->toArray();
 
-        $jobs = [
-            ['title' => 'Laravel Developer', 'description' => 'Expert in Laravel framework'],
-            ['title' => 'Frontend Engineer', 'description' => 'Expert in React and Tailwind'],
-            ['title' => 'UI/UX Designer', 'description' => 'Expert in Figma'],
-            ['title' => 'Product Manager', 'description' => 'Expert in Agile'],
-        ];
-
-        foreach ($jobs as $jobData) {
-            Job::create(array_merge($jobData, ['user_id' => $user->id]));
+        if (empty($userIds)) {
+            $this->command->error('No users found in the database. Please seed users first.');
+            return;
         }
+
+        $jobs = [];
+        foreach ($jobListings as $listing) {
+            $jobs[] = [
+                'title' => $listing['title'],
+                'description' => $listing['description'],
+                'salary' => $listing['salary'],
+                'user_id' => $userIds[array_rand($userIds)],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+        }
+
+        DB::table('job_listings')->insert($jobs);
     }
 }
