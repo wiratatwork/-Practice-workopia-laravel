@@ -1,7 +1,8 @@
 .hero-overlay {
     position: relative;
     width: 100%;
-    height: 300px;
+    min-height: 300px;
+    height: 40vh;
     background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070');
     background-size: cover;
     background-position: center;
@@ -10,6 +11,7 @@
     justify-content: center;
     color: white;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 .hero-overlay::before {
@@ -19,11 +21,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-overlay {
+        height: 250px;
+    }
 }

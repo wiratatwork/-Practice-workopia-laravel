@@ -2,27 +2,15 @@
     <x-slot:title>All Jobs</x-slot:title>
 
     <div class="container mx-auto px-4 py-8">
-        <div class="hero-overlay mb-8 rounded-xl overflow-hidden">
+        <div class="hero-overlay mb-12 rounded-3xl overflow-hidden shadow-2xl">
             <div class="hero-content">
-                <h1 class="text-4xl font-bold mb-2">Find Your Dream Job</h1>
-                <p class="text-lg">Explore the best opportunities in the tech industry</p>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+                    Find Your <span class="text-yellow-400">Dream Job</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                    Explore the best opportunities in the tech industry and take the next step in your career.
+                </p>
             </div>
-        </div>
-
-        <div class="flex gap-4 mb-6">
-            <x-button-link url="/jobs/create">
-                Create New Job (Default)
-            </x-button-link>
-
-            <x-button-link 
-                url="/jobs/create" 
-                bgClass="bg-red-500" 
-                hoverClass="hover:bg-red-600" 
-                icon="fa-plus"
-                class="mt-4"
-            >
-                Add Job (Custom)
-            </x-button-link>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -36,4 +24,5 @@
         </div>
     </div>
 </x-layout>
+
 
