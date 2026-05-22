@@ -33,11 +33,20 @@
                 ${{ number_format($job->salary) }}<span class="text-xs font-normal text-gray-500">/year</span>
             </span>
         </div>
-        <a href="/jobs/{{ $job->id }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-            Details 
-            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-        </a>
+        <div class="flex items-center gap-4">
+            <form action="/jobs/{{ $job->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-gray-400 hover:text-red-500 transition-colors" title="Delete Job">
+                    <i class="fa-solid fa-trash-can text-sm"></i>
+                </button>
+            </form>
+            <a href="/jobs/{{ $job->id }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                Details 
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </div>
     </div>
 </div>

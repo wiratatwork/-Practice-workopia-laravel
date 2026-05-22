@@ -32,43 +32,56 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): string
+    public function store(Request $request)
     {
-        $title = $request->input('title');
-        $description = $request->input('description');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'salary' => 'required|numeric',
+            'is_remote' => 'boolean',
+        ]);
 
-        return "Job created successfully! Title: $title, Description: $description";
+        $validated['is_remote'] = $request->has('is_remote');
+        
+        // For now, we'll use the first user as owner since we are not authenticated
+        $user = \App\Models\User::first();
+        $validated['user_id'] = $user->id;
+
+        Job::create($validated);
+
+        return redirect('/jobs')->with('success', 'Job posted successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Job $job)
+    public function edit(Job $job): View
+    {
+        return view('jobs.edit', compact('job'));
+    }
+
+    public function update(Request $request, Job $job)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'salary' => 'required|numeric',
+            'is_remote' => 'boolean',
+        ]);
+
+        $validated['is_remote'] = $request->has('is_remote');
+        
+        $job->update($validated);
+
+        return redirect('/jobs')->with('success', 'Job updated successfully!');
+    }
+
+    public function destroy(Job $job)
+    {
+        $job->delete();
+
+        return redirect('/jobs')->with('success', 'Job deleted successfully!');
+    }
+
+    public function show(Job $job): View
     {
         return view('jobs.show', compact('job'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
