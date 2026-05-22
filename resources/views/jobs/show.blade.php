@@ -4,7 +4,19 @@
     <div class="container mx-auto px-4 py-12">
         <div class="max-w-2xl mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100">
             <div class="flex justify-between items-start mb-8">
-                <h1 class="text-3xl font-extrabold text-gray-900 leading-tight">{{ $job->title }}</h1>
+                <div class="flex items-center gap-4">
+                    @if($job->company_logo)
+                        <img src="{{ asset('storage/' . $job->company_logo) }}" alt="{{ $job->company_name }} Logo" class="w-16 h-16 rounded-xl object-cover shadow-sm">
+                    @else
+                        <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400 font-bold">
+                            {{ substr($job->company_name, 0, 1) }}
+                        </div>
+                    @endif
+                    <div>
+                        <h1 class="text-3xl font-extrabold text-gray-900 leading-tight">{{ $job->title }}</h1>
+                        <p class="text-blue-600 font-semibold">{{ $job->company_name }}</p>
+                    </div>
+                </div>
                 <form action="/jobs/{{ $job->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?')" class="inline-block">
                     @csrf
                     @method('DELETE')
@@ -42,6 +54,9 @@
 
             <div class="border-t border-gray-100 pt-8 flex items-center justify-between">
                 <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm">
+                        {{ strtoupper(substr($job->user->name, 0, 1)) }}
+                    </div>
                     <div class="flex flex-col">
                         <span class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Posted by</span>
                         <span class="text-sm font-semibold text-gray-800">{{ $job->user->name }}</span>
@@ -59,5 +74,6 @@
         </div>
     </div>
 </x-layout>
+
 
 

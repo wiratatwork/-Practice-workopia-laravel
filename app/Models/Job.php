@@ -11,7 +11,7 @@ class Job extends Model
     use HasFactory;
 
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'description', 'salary', 'user_id', 'is_remote'];
+    protected $fillable = ['title', 'description', 'salary', 'user_id', 'is_remote', 'company_name', 'company_logo'];
 
     public function user(): BelongsTo
     {

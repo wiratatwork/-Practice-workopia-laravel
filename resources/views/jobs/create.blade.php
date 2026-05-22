@@ -8,10 +8,26 @@
                 <p class="text-gray-500">Fill in the details below to reach your next great hire.</p>
             </div>
             
-            <form action="/jobs" method="POST" class="space-y-6">
+            <form action="/jobs" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
                 <div class="grid grid-cols-1 gap-6">
+                    <x-inputs.text 
+                        id="company_name" 
+                        name="company_name" 
+                        label="Company Name" 
+                        placeholder="e.g. Google" 
+                        required
+                    />
+
+                    <div class="mb-4">
+                        <label for="company_logo" class="block text-sm font-medium text-gray-700 mb-1">Company Logo</label>
+                        <input type="file" name="company_logo" id="company_logo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                        @error('company_logo')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <x-inputs.text 
                         id="title" 
                         name="title" 

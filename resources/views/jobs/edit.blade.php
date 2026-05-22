@@ -8,11 +8,33 @@
                 <p class="text-gray-500">Update the details of your job posting to attract the right candidates.</p>
             </div>
             
-            <form action="/jobs/{{ $job->id }}" method="POST" class="space-y-6">
+            <form action="/jobs/{{ $job->id }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 @method('PUT')
                 
                 <div class="grid grid-cols-1 gap-6">
+                    <x-inputs.text 
+                        id="company_name" 
+                        name="company_name" 
+                        label="Company Name" 
+                        value="{{ $job->company_name }}" 
+                        placeholder="e.g. Google" 
+                        required
+                    />
+
+                    <div class="mb-4">
+                        <label for="company_logo" class="block text-sm font-medium text-gray-700 mb-1">Company Logo</label>
+                        <input type="file" name="company_logo" id="company_logo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                        @if($job->company_logo)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $job->company_logo) }}" alt="Current Logo" class="h-12 w-auto rounded border">
+                            </div>
+                        @endif
+                        @error('company_logo')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <x-inputs.text 
                         id="title" 
                         name="title" 
@@ -65,4 +87,5 @@
         </div>
     </div>
 </x-layout>
+
 
