@@ -1,9 +1,15 @@
-@props(['id', 'name', 'label', 'placeholder' => '', 'value' => '', 'required' => false])
+@props(['id' => null, 'name', 'label' => null, 'placeholder' => '', 'value' => '', 'required' => false])
+
+@php
+    $id = $id ?? $name;
+@endphp
 
 <div class="mb-4">
-    <label for="{{ $id }}" class="block text-sm font-medium text-gray-700 mb-1">
-        {{ $label }} @if($required)<span class="text-red-500">*</span>@endif
-    </label>
+    @if($label)
+        <label for="{{ $id }}" class="block text-sm font-medium text-gray-700 mb-1">
+            {{ $label }} @if($required)<span class="text-red-500">*</span>@endif
+        </label>
+    @endif
     <textarea 
         id="{{ $id }}" 
         name="{{ $name }}" 
